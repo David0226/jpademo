@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table
-public class User {
+public class UserEntity {
     @Id
-    private String user_id;
+    private String userid;
     @Column(name = "user_password")
     private String password;
     @Column(length = 50, name = "user_name")
@@ -27,4 +27,11 @@ public class User {
     @CreatedDate
     @Column(name = "created_dt")
     private LocalDateTime created_dt;
+
+    public static UserEntity of(String userid, String password) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUserid(userid);
+        userEntity.setPassword(password);
+        return userEntity;
+    }
 }
