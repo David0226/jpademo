@@ -2,27 +2,36 @@ package com.jpademo.jpademoApp.service;
 
 import com.jpademo.jpademoApp.entity.UserEntity;
 import com.jpademo.jpademoApp.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.buf.UEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
-@Transactional
 public class UserService {
 
-    private final UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    @Transactional
-    public UserEntity join(String userid, String password){
-        userRepository.findById(userid).ifPresent(it->{
-
-        });
-
-        UserEntity userEntity = userRepository.save(UserEntity.of(userid, password));
-        return userEntity;
+    // 회원 찾기
+    public Optional<UserEntity> getUserId(String email){
+        return userRepository.findByEmail(email);
     }
 
+    // 회원 가입
+    public UserEntity signUp(UserEntity user){
+        return userRepository.save(user);
+    }
 
+    // 로그인
+    public Optional<UserEntity> login(String email, String password){
+        Optional<UserEntity> user = userRepository.findByEmailAndPassword(email, password);
+        if (user.isPresent()) {
+            // 로그인 성공 시 처리
+            return user;
+        } else {
+            // 로그인 실패 시 처리 (예외 처리)
+            throw new RuntimeException("로그인 실패: 유저 정보를 찾을 수 없습니다."); // 예외 처리 예시 (원하는 예외 타입 및 메시지로 변경 가능)
+        }
+    }
 }
