@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class Article {
+public class Article extends BaseFields{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
