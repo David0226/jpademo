@@ -15,6 +15,5 @@ public class Article extends BaseFields{
     @Setter @Column(nullable = false) private String title;
     @Setter private String comment;
     private String hashtag;
-
     private LocalDateTime CreateAt;
 }
