@@ -1,32 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login & Signup Test</title>
+    <meta charset="UTF-8">
+    <title>홈</title>
 </head>
 <body>
-<h1>Login</h1>
-<form th:action="@{/login}" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="userid">
-    <br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password">
-    <br>
-    <input type="submit" value="Login">
-</form>
-
-<h1>Signup</h1>
-<form th:action="@{/signup}" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username">
-    <br>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email">
-    <br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password">
-    <br>
-    <input type="submit" value="Signup">
-</form>
+<h1>홈</h1>
+<p th:text="'환영합니다'"></p>
+<a th:href="@{/login}">로그아웃</a>
 </body>
 </html>
