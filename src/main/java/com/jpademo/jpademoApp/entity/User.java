@@ -13,34 +13,20 @@ import java.time.LocalDateTime;
 @Entity
 @Table()
 @Data
-public class User {
+public class User extends BaseFields {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(length = 50)
-    private String username;
+    private Long userId;
 
-    @Column(nullable = false)
-    private String password;
+    @Setter @Column(nullable = false) private String userPassword;
 
-    @Column(nullable = false, unique = true, length = 45)
-    private String email;
+    @Setter @Column(nullable = false, unique = true, length = 45) private String email;
 
-    @Column(length = 30)
-    private long phoneno;
+    @Setter @Column(length = 50) private String nickname;
 
-    @Column(name = "admin_yn")
-    private boolean adminyn;
+    protected User(){};
 
-    @CreatedDate
-    @Column
-    private LocalDateTime createddt;
 
-    public static User of(String email, String password) {
-        User userEntity = new User();
-        userEntity.setEmail(email);
-        userEntity.setPassword(password);
-        return userEntity;
-    }
+
+
 }

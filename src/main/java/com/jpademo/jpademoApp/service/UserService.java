@@ -35,6 +35,5 @@ public class UserService {
             // 로그인 실패 시 처리 (예외 처리)
             throw new RuntimeException("로그인 실패: 유저 정보를 찾을 수 없습니다."); // 예외 처리 예시 (원하는 예외 타입 및 메시지로 변경 가능)
         }
-        userRepository.findByEmailAndPassword(email, password).
     }
 }
