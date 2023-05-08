@@ -31,9 +31,6 @@ public class UserEntity {
     @Column(name = "admin_yn")
     private boolean adminYn;
 
-    @CreatedDate
-    @Column(name = "created_dt")
-    private LocalDateTime createdDt;
 
     public static UserEntity of(String email, String password) {
         UserEntity userEntity = new UserEntity();
