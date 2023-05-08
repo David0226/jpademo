@@ -1,10 +1,11 @@
 package com.jpademo.jpademoApp.service;
 
-import com.jpademo.jpademoApp.entity.UserEntity;
+import com.jpademo.jpademoApp.entity.User;
 import com.jpademo.jpademoApp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -14,18 +15,21 @@ public class UserService {
     private UserRepository userRepository;
 
     // 회원 찾기
-    public Optional<UserEntity> getUserId(String email){
+    public Optional<User> getUserId(String email){
         return userRepository.findByEmail(email);
     }
 
     // 회원 가입
-    public UserEntity signUp(UserEntity user){
+    public User signUp(User user){
+        User save = userRepository.save(user);
+
         return userRepository.save(user);
     }
 
     // 로그인
-    public Optional<UserEntity> login(String email, String password){
-        Optional<UserEntity> user = userRepository.findByEmailAndPassword(email, password);
+    @Transactional(readOnly = true)
+    public User login(String email, String password){
+        User user = userRepository.findByEmailAndPassword(email, password);
         if (user.isPresent()) {
             // 로그인 성공 시 처리
             return user;
