@@ -25,8 +25,25 @@ public record UserDto(
         return new UserDto(userId, userPassword, email, nickname, createdAt,createdBy,modifiedAt,modifiedBy);
     }
 
+    // entity -> DTO 객체
     public static UserDto from(User entity){
-        return new UserDto()
+        return new UserDto(
+                entity.getUserId(),
+                entity.getUserPassword(),
+                entity.getEmail(),
+                entity.getNickname(),
+                entity.getCreatedAt(),
+                entity.getCreatedBy(),
+                entity.getModifiedAt(),
+                entity.getModifiedBy()
+        );
     }
-
+    public User toEntity(){
+        return User.of(
+                userId,
+                userPassword,
+                email,
+                nickname
+        );
+    }
 }
