@@ -38,9 +38,13 @@ public class UserController {
     }
 
     @PostMapping("/api/login")
+    public void login(){
+
+    }
+
     public String login(@ModelAttribute("user") User user, Model model, HttpSession session) {
         try {
-            Optional<User> loggedUser = userService.login(user.getEmail(), user.getPassword());
+            Optional<User> loggedUser = userService.login(user.getEmail(), user.getUserPassword());
             if (loggedUser.isPresent()) { // 로그인 성공 시
                 session.setAttribute("user", loggedUser.get()); // 세션에 사용자 정보 저장
                 return "redirect:/home"; // 홈 페이지로 리다이렉트
@@ -55,18 +59,22 @@ public class UserController {
     }
 
     @GetMapping("/signup")
-    public String getSignupPage(@ModelAttribute("user") User user, Model model) {
-        if (!model.containsAttribute("user")) { // "user" 객체가 없는 경우에만 추가
-            model.addAttribute("user", new User());
-        }
-        return "signup";
+    public void signup(){
+
     }
-    @PostMapping("/api/signup")
-    public String signup(@ModelAttribute("user") User user, Model model) {
-        // 회원가입 처리 로직
-        // (예시로는 UserRepository를 사용하여 사용자 정보를 저장하는 로직을 가정)
-        userService.signUp(user);
-        model.addAttribute("message", "회원가입이 완료되었습니다.");
-        return "login";
-    }
+//
+//    public String getSignupPage(@ModelAttribute("user") User user, Model model) {
+//        if (!model.containsAttribute("user")) { // "user" 객체가 없는 경우에만 추가
+//            model.addAttribute("user", new User());
+//        }
+//        return "signup";
+//    }
+//    @PostMapping("/api/signup")
+//    public String signup(@ModelAttribute("user") User user, Model model) {
+//        // 회원가입 처리 로직
+//        // (예시로는 UserRepository를 사용하여 사용자 정보를 저장하는 로직을 가정)
+//        userService.signUp(user);
+//        model.addAttribute("message", "회원가입이 완료되었습니다.");
+//        return "login";
+//    }
 }
